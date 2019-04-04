@@ -1,7 +1,20 @@
 import React from "react";
-import { List, Datagrid, TextField, EmailField } from "react-admin";
+import {
+	List,
+	Datagrid,
+	TextField,
+	EmailField,
+	Edit,
+	SimpleForm,
+	DisabledInput,
+	ReferenceInput,
+	SelectInput,
+	LongTextInput,
+	TextInput,
+	Create
+} from "react-admin";
 
-export default class UserList extends React.Component {
+export class UserList extends React.Component {
 	// eslint-disable-next-line no-useless-constructor
 	constructor(props) {
 		super(props);
@@ -23,3 +36,28 @@ export default class UserList extends React.Component {
 		);
 	}
 }
+
+export const UserEdit = props => (
+	<Edit {...props}>
+		<SimpleForm>
+			<DisabledInput source="id" />
+			<ReferenceInput source="userid" reference="users">
+				<SelectInput optionText="name" />
+			</ReferenceInput>
+			<TextInput source="title" />
+			<LongTextInput source="body" />
+		</SimpleForm>
+	</Edit>
+);
+
+export const UserCreate = props => (
+	<Create {...props}>
+		<SimpleForm>
+			<ReferenceInput source="userId" reference="users">
+				<SelectInput optionText="name" />
+			</ReferenceInput>
+			<TextInput source="title" />
+			<LongTextInput source="body" />
+		</SimpleForm>
+	</Create>
+);
